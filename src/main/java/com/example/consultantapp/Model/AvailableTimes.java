@@ -25,4 +25,7 @@ public class AvailableTimes {
     @JoinColumn(name = "consultantId", referencedColumnName = "consultantId", nullable = false)
     private Consultant consultant;
 
+    @OneToOne(mappedBy = "availableTimes", cascade = CascadeType.REMOVE)
+    private Appointment appointment;
+
 }

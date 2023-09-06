@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class AppointmentDTO {
     private int appointmentId;
-    private AppointmentStatus appointmentStatus;
+    private boolean appointmentStatus;
     private int consultantConsultantId;
     private int jobSeekerJobSeekerId;
 }

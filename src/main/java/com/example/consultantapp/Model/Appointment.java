@@ -16,14 +16,15 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int appointmentId;
-    @Enumerated(EnumType.STRING)
-    @Column(name="appointmentStatus", nullable = false)
-    private AppointmentStatus appointmentStatus;
-
+    private boolean appointmentStatus;
     @OneToOne
     @JoinColumn(name = "consultantId", referencedColumnName = "consultantId", unique = true)
     private Consultant consultant;
     @OneToOne
     @JoinColumn(name = "jobSeekerId", referencedColumnName = "jobSeekerId", unique = true)
     private JobSeeker jobSeeker;
+
+    @OneToOne
+    @JoinColumn(name = "availableTimeId", referencedColumnName = "availableTimeId", unique = true)
+    private AvailableTimes availableTimes;
 }
