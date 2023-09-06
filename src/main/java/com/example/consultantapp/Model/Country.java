@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name="country")
 @Getter
@@ -16,7 +18,8 @@ public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int countryId;
+
     private String country;
-    @OneToOne(mappedBy = "country",cascade = CascadeType.REMOVE)
-    private Consultant consultant;
+    @OneToMany(mappedBy = "country", cascade = CascadeType.REMOVE)
+    private List<ConsultantCountry> consultantCountries;
 }

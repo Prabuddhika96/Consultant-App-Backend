@@ -13,6 +13,5 @@ public class ConsultantDTO {
     private int consultantId;
     private String jobType;
     private boolean status;
-    private Country countryCountryId;
-    private User userUserId;
+    private int userUserId;
 }

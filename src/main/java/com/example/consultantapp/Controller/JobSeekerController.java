@@ -1,6 +1,7 @@
 package com.example.consultantapp.Controller;
 
 import com.example.consultantapp.DTO.JobSeekerDTO;
+import com.example.consultantapp.DTO.JobSeekerFullDTO;
 import com.example.consultantapp.Service.JobSeekerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class JobSeekerController {
     private JobSeekerService jobSeekerService;
 
     @PostMapping("/addjobseeker")
-    public ResponseEntity<?> addJobSeeker(@RequestBody JobSeekerDTO data){
+    public ResponseEntity<?> addJobSeeker(@RequestBody JobSeekerFullDTO data){
         Map<String, Object> map = new LinkedHashMap<>();
         JobSeekerDTO seeker = jobSeekerService.addJobSeeker(data);
 

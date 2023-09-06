@@ -19,13 +19,13 @@ public class Consultant{
     private String jobType;
     private boolean status;
     @OneToOne
-    @JoinColumn(name = "countryId", referencedColumnName = "countryId", nullable = false)
-    private Country country;
-    @OneToOne
     @JoinColumn(name = "userId", referencedColumnName = "userId", unique = true)
     private User user;
     @OneToOne(mappedBy = "consultant", cascade = CascadeType.REMOVE)
     private Appointment appointment;
     @OneToMany(mappedBy = "consultant", cascade = CascadeType.REMOVE)
     private List<AvailableTimes> availableTimes;
+
+    @OneToMany(mappedBy = "consultant", cascade = CascadeType.REMOVE)
+    private List<ConsultantCountry> consultantCountries;
 }

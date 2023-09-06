@@ -38,20 +38,7 @@ public class UserServiceImpl implements UserService {
                  if(newUser!=null){
                      LoginDetailsDTO ld = loginDetailsServiceImpl.addLoginDetails(userData,user);
                      if(ld!=null){
-                         if(userData.getRole().equals(Role.JOBSEEKER)){
-                             JobSeekerDTO jobSeeker = jobSeekerServiceImpl.registerJobSeeker(newUser);
-                             if(jobSeeker!=null){
-                                 return modelMapper.map(user, new TypeToken<UserDTO>() {}.getType());
-                             }
-                             else{
-                                 userRepository.deleteByUserIdEquals(newUser.getUserId());
-                             }
-                         } else if (userData.getRole().equals(Role.CONSULTANT)) {
-                             return null;
-                         }
-                         else if (userData.getRole().equals(Role.RECEPTION)) {
-                             return null;
-                         }
+                         return modelMapper.map(user, new TypeToken<UserDTO>() {}.getType());
                      }
                      else{
                          userRepository.deleteByUserIdEquals(newUser.getUserId());
