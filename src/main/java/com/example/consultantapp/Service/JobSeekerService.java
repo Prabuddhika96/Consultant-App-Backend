@@ -1,4 +1,4 @@
 package com.example.consultantapp.Service;
 
-public interface Country {
+public interface JobSeekerService {
 }
