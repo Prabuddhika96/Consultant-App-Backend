@@ -13,6 +13,7 @@ public class JobSeekerServiceImpl implements JobSeekerService {
     private JobSeekerRepository jobSeekerRepository;
     @Autowired
     private ModelMapper modelMapper;
+
     @Override
     public JobSeekerDTO addJobSeeker(String email) {
         return null;
