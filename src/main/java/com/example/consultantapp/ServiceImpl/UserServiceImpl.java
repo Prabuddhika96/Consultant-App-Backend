@@ -4,6 +4,7 @@ import com.example.consultantapp.DTO.JobSeekerDTO;
 import com.example.consultantapp.DTO.LoginDetailsDTO;
 import com.example.consultantapp.DTO.UserDTO;
 import com.example.consultantapp.DTO.UserFullDTO;
+import com.example.consultantapp.Enum.Role;
 import com.example.consultantapp.Model.JobSeeker;
 import com.example.consultantapp.Model.LoginDetails;
 import com.example.consultantapp.Model.User;
@@ -37,12 +38,19 @@ public class UserServiceImpl implements UserService {
                  if(newUser!=null){
                      LoginDetailsDTO ld = loginDetailsServiceImpl.addLoginDetails(userData,user);
                      if(ld!=null){
-                         JobSeekerDTO jobSeeker = jobSeekerServiceImpl.registerJobSeeker(newUser);
-                         if(jobSeeker!=null){
-                             return modelMapper.map(user, new TypeToken<UserDTO>() {}.getType());
+                         if(userData.getRole().equals(Role.JOBSEEKER)){
+                             JobSeekerDTO jobSeeker = jobSeekerServiceImpl.registerJobSeeker(newUser);
+                             if(jobSeeker!=null){
+                                 return modelMapper.map(user, new TypeToken<UserDTO>() {}.getType());
+                             }
+                             else{
+                                 userRepository.deleteByUserIdEquals(newUser.getUserId());
+                             }
+                         } else if (userData.getRole().equals(Role.CONSULTANT)) {
+                             return null;
                          }
-                         else{
-                             userRepository.deleteByUserIdEquals(newUser.getUserId());
+                         else if (userData.getRole().equals(Role.RECEPTION)) {
+                             return null;
                          }
                      }
                      else{
