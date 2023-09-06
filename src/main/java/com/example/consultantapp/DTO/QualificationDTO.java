@@ -11,4 +11,5 @@ import lombok.Setter;
 public class QualificationDTO {
     private int qualificationId;
     private int jobSeekerJobSeekerId;
+    private String qualification;
 }

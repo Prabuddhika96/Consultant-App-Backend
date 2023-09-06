@@ -18,4 +18,6 @@ public class Qualification {
     @OneToOne
     @JoinColumn(name = "jobSeekerId", referencedColumnName = "jobSeekerId", unique = true)
     private JobSeeker jobSeeker;
+
+    private String qualification;
 }

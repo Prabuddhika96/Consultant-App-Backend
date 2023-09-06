@@ -18,9 +18,9 @@ public class JobSeekerController {
     private JobSeekerService jobSeekerService;
 
     @PostMapping("/addjobseeker")
-    public ResponseEntity<?> addJobSeeker(@RequestBody String email){
+    public ResponseEntity<?> addJobSeeker(@RequestBody JobSeekerDTO data){
         Map<String, Object> map = new LinkedHashMap<>();
-        JobSeekerDTO seeker = jobSeekerService.addJobSeeker(email);
+        JobSeekerDTO seeker = jobSeekerService.addJobSeeker(data);
 
         if (seeker!=null) {
             map.put("status", 1);
@@ -29,8 +29,10 @@ public class JobSeekerController {
         } else {
             map.clear();
             map.put("status", 0);
-            map.put("message", "Email is not available");
+            map.put("message", "Job Seeker Adding Failed");
             return new ResponseEntity<>(map, HttpStatus.OK);
         }
     }
+
+
 }
