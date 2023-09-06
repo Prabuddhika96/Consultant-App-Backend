@@ -18,14 +18,23 @@ public class UserServiceImpl implements UserService {
     private ModelMapper modelMapper;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private LoginDetailsServiceImpl loginDetailsServiceImpl;
     @Override
     public UserDTO addUser(UserFullDTO userData) {
         try{
          User user = modelMapper.map(userData, User.class);
-        return modelMapper.map(user, new TypeToken<UserDTO>() {}.getType());
-
-//            LoginDetails newLd = loginDetailsRepository.save(ld);
-//            return modelMapper.map(ld, new TypeToken<LoginDetailsDTO>() {}.getType());
+         User newUser = userRepository.save(user);
+         if(newUser!=null){
+             LoginDetailsDTO ld = loginDetailsServiceImpl.addLoginDetails(userData,user);
+             if(ld!=null){
+                 return modelMapper.map(user, new TypeToken<UserDTO>() {}.getType());
+             }
+             else{
+                 userRepository.deleteByUserIdEquals(newUser.getUserId());
+             }
+         }
+         return null;
         }
         catch(Exception e){
             System.out.println(e.toString());
